@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA Caps Store</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">🏀 NBA<span>Caps</span></a>
+      <nav class="nav" id="nav">
+        <a href="#productos">Gorras</a>
+        <a href="#conferencias">Conferencias</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="cart-btn" id="cartBtn">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Lleva a tu equipo en la cabeza</h1>
+      <p>Gorras oficiales de los 30 equipos de la NBA. Envíos a todo el país.</p>
+      <a href="#productos" class="btn">Ver gorras</a>
+    </div>
+  </section>
+
+  <section class="filters container" id="conferencias">
+    <button class="filter active" data-filter="todos">Todos</button>
+    <button class="filter" data-filter="Este">Conferencia Este</button>
+    <button class="filter" data-filter="Oeste">Conferencia Oeste</button>
+  </section>
+
+  <main class="container">
+    <h2 class="section-title" id="productos">Nuestras gorras</h2>
+    <div class="grid" id="productGrid"></div>
+  </main>
+
+  <!-- Carrito -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart" id="cart">
+    <div class="cart-header">
+      <h3>Tu carrito</h3>
+      <button class="close-cart" id="closeCart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: <span id="cartTotal">$0</span></div>
+      <button class="btn btn-full" id="checkoutBtn">Finalizar compra</button>
+    </div>
+  </aside>
+
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <p>🏀 NBACaps — Tienda no oficial, demo educativa.</p>
+      <p>📧 contacto@nbacaps.demo · 📞 +57 300 000 0000</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
