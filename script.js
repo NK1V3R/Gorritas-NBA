@@ -1,17 +1,17 @@
-// Catálogo de gorras NBA
+// Catálogo de gorras NBA (abbr = monograma; bg/accent = colores del equipo)
 const productos = [
-  { id:1, team:"Los Angeles Lakers", conf:"Oeste", price:89900, emoji:"💜", bg:"#552583" },
-  { id:2, team:"Boston Celtics", conf:"Este", price:89900, emoji:"☘️", bg:"#007a33" },
-  { id:3, team:"Golden State Warriors", conf:"Oeste", price:94900, emoji:"⚡", bg:"#1d428a" },
-  { id:4, team:"Chicago Bulls", conf:"Este", price:84900, emoji:"🐂", bg:"#ce1141" },
-  { id:5, team:"Miami Heat", conf:"Este", price:84900, emoji:"🔥", bg:"#98002e" },
-  { id:6, team:"Milwaukee Bucks", conf:"Este", price:89900, emoji:"🦌", bg:"#00471b" },
-  { id:7, team:"Denver Nuggets", conf:"Oeste", price:89900, emoji:"⛰️", bg:"#0e2240" },
-  { id:8, team:"Phoenix Suns", conf:"Oeste", price:84900, emoji:"☀️", bg:"#e56020" },
-  { id:9, team:"Dallas Mavericks", conf:"Oeste", price:89900, emoji:"🐴", bg:"#00538c" },
-  { id:10, team:"New York Knicks", conf:"Este", price:94900, emoji:"🗽", bg:"#f58426" },
-  { id:11, team:"Philadelphia 76ers", conf:"Este", price:84900, emoji:"🔔", bg:"#006bb6" },
-  { id:12, team:"Oklahoma City Thunder", conf:"Oeste", price:89900, emoji:"⚡", bg:"#007ac1" },
+  { id:1, team:"Los Angeles Lakers", conf:"Oeste", price:89900, abbr:"LAL", bg:"#552583", accent:"#fdb927" },
+  { id:2, team:"Boston Celtics", conf:"Este", price:89900, abbr:"BOS", bg:"#007a33", accent:"#ffffff" },
+  { id:3, team:"Golden State Warriors", conf:"Oeste", price:94900, abbr:"GSW", bg:"#1d428a", accent:"#ffc72c" },
+  { id:4, team:"Chicago Bulls", conf:"Este", price:84900, abbr:"CHI", bg:"#ce1141", accent:"#ffffff" },
+  { id:5, team:"Miami Heat", conf:"Este", price:84900, abbr:"MIA", bg:"#98002e", accent:"#f9a01b" },
+  { id:6, team:"Milwaukee Bucks", conf:"Este", price:89900, abbr:"MIL", bg:"#00471b", accent:"#eee1c6" },
+  { id:7, team:"Denver Nuggets", conf:"Oeste", price:89900, abbr:"DEN", bg:"#0e2240", accent:"#fec524" },
+  { id:8, team:"Phoenix Suns", conf:"Oeste", price:84900, abbr:"PHX", bg:"#1d1160", accent:"#e56020" },
+  { id:9, team:"Dallas Mavericks", conf:"Oeste", price:89900, abbr:"DAL", bg:"#00538c", accent:"#b8c4ca" },
+  { id:10, team:"New York Knicks", conf:"Este", price:94900, abbr:"NYK", bg:"#006bb6", accent:"#f58426" },
+  { id:11, team:"Philadelphia 76ers", conf:"Este", price:84900, abbr:"PHI", bg:"#006bb6", accent:"#ed174c" },
+  { id:12, team:"Oklahoma City Thunder", conf:"Oeste", price:89900, abbr:"OKC", bg:"#007ac1", accent:"#ef3b24" },
 ];
 
 const fmt = n => "$" + n.toLocaleString("es-CO");
@@ -28,7 +28,9 @@ function renderProductos(filtro="todos"){
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <div class="card-img" style="background:${p.bg}">${p.emoji}</div>
+        <div class="card-img" style="background:${p.bg}">
+          <div class="crest" style="border-color:${p.accent};color:${p.accent}">${p.abbr}</div>
+        </div>
         <div class="card-body">
           <div class="card-team">${p.team}</div>
           <div class="card-conf">Conferencia ${p.conf}</div>
@@ -84,7 +86,7 @@ function renderCarrito(){
     const el = document.createElement("div");
     el.className = "cart-item";
     el.innerHTML = `
-      <span class="emoji">${i.emoji}</span>
+      <span class="crest crest-sm" style="border-color:${i.accent};color:${i.accent};background:${i.bg}">${i.abbr}</span>
       <div class="cart-item-info">
         <strong>${i.team}</strong>
         <span>${fmt(i.price)}</span>
