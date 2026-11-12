@@ -11,8 +11,8 @@
     <div class="container header-inner">
       <a href="#" class="logo">🏀 NBA<span>Caps</span></a>
       <nav class="nav" id="nav">
-        <a href="#productos">Gorras</a>
-        <a href="#conferencias">Conferencias</a>
+        <a href="#" class="tab-link" data-tab="tienda">Gorras</a>
+        <a href="#" class="tab-link" data-tab="trivia">Trivia NBA</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <button class="cart-btn" id="cartBtn">
@@ -22,24 +22,35 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Lleva a tu equipo en la cabeza</h1>
-      <p>Gorras oficiales de los 30 equipos de la NBA. Envíos a todo el país.</p>
-      <a href="#productos" class="btn">Ver gorras</a>
-    </div>
-  </section>
+  <!-- PESTAÑA TIENDA -->
+  <div id="tabTienda">
+    <section class="hero">
+      <div class="container">
+        <h1>Lleva a tu equipo en la cabeza</h1>
+        <p>Gorras de los equipos de la NBA. Envíos a todo el país.</p>
+        <a href="#productos" class="btn">Ver gorras</a>
+      </div>
+    </section>
 
-  <section class="filters container" id="conferencias">
-    <button class="filter active" data-filter="todos">Todos</button>
-    <button class="filter" data-filter="Este">Conferencia Este</button>
-    <button class="filter" data-filter="Oeste">Conferencia Oeste</button>
-  </section>
+    <section class="filters container" id="conferencias">
+      <button class="filter active" data-filter="todos">Todos</button>
+      <button class="filter" data-filter="Este">Conferencia Este</button>
+      <button class="filter" data-filter="Oeste">Conferencia Oeste</button>
+    </section>
 
-  <main class="container">
-    <h2 class="section-title" id="productos">Nuestras gorras</h2>
-    <div class="grid" id="productGrid"></div>
-  </main>
+    <main class="container">
+      <h2 class="section-title" id="productos">Nuestras gorras</h2>
+      <div class="grid" id="productGrid"></div>
+    </main>
+  </div>
+
+  <!-- PESTAÑA TRIVIA -->
+  <div id="tabTrivia" class="hidden">
+    <main class="container">
+      <h2 class="section-title">Trivia NBA 🏀</h2>
+      <div class="trivia" id="trivia"></div>
+    </main>
+  </div>
 
   <!-- Carrito -->
   <div class="cart-overlay" id="cartOverlay"></div>
