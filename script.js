@@ -130,6 +130,95 @@ document.getElementById("menuToggle").addEventListener("click", () => {
   document.getElementById("nav").classList.toggle("open");
 });
 
+// ---- Pestañas ----
+document.querySelectorAll(".tab-link").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const tab = link.dataset.tab;
+    document.getElementById("tabTienda").classList.toggle("hidden", tab!=="tienda");
+    document.getElementById("tabTrivia").classList.toggle("hidden", tab!=="trivia");
+    document.getElementById("nav").classList.remove("open");
+    window.scrollTo(0,0);
+    if(tab==="trivia") iniciarTrivia();
+  });
+});
+
+// ---- Trivia NBA ----
+const preguntas = [
+  { q:"¿Qué jugador tiene el récord de más puntos anotados en la historia de la NBA?",
+    opts:["LeBron James","Kareem Abdul-Jabbar","Kobe Bryant","Michael Jordan"], a:0 },
+  { q:"¿Cuántos equipos conforman la NBA actualmente?",
+    opts:["28","30","32","29"], a:1 },
+  { q:"¿Qué equipo ganó el primer campeonato tras el nombre 'NBA' en 1947?",
+    opts:["Boston Celtics","Philadelphia Warriors","New York Knicks","Chicago Stags"], a:1 },
+  { q:"¿Con qué equipo ganó Michael Jordan sus 6 anillos?",
+    opts:["Washington Wizards","Chicago Bulls","Los Angeles Lakers","Boston Celtics"], a:1 },
+  { q:"¿Qué equipo tiene más campeonatos de la NBA (empatado en el primer lugar)?",
+    opts:["Golden State Warriors","Boston Celtics","Miami Heat","Chicago Bulls"], a:1 },
+  { q:"¿Cuántos puntos vale un tiro libre?",
+    opts:["1","2","3","0"], a:0 },
+  { q:"¿Dónde juegan sus partidos de local Los Angeles Lakers?",
+    opts:["Madison Square Garden","Crypto.com Arena","Chase Center","TD Garden"], a:1 },
+  { q:"¿Quién es conocido como 'The Greek Freak'?",
+    opts:["Luka Dončić","Nikola Jokić","Giannis Antetokounmpo","Joel Embiid"], a:2 },
+];
+
+let tIndex=0, tScore=0, tContestada=false;
+const triviaBox = document.getElementById("trivia");
+
+function iniciarTrivia(){
+  tIndex=0; tScore=0; tContestada=false;
+  renderPregunta();
+}
+
+function renderPregunta(){
+  const p = preguntas[tIndex];
+  tContestada=false;
+  triviaBox.innerHTML = `
+    <div class="trivia-progress">Pregunta ${tIndex+1} de ${preguntas.length} · Aciertos: ${tScore}</div>
+    <div class="trivia-q">${p.q}</div>
+    <div class="trivia-opts">
+      ${p.opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}
+    </div>
+    <div id="triviaNext"></div>`;
+}
+
+function renderResultado(){
+  const pct = Math.round(tScore/preguntas.length*100);
+  let msg = pct===100 ? "¡Perfecto! Eres un crack 🏆"
+          : pct>=60 ? "¡Muy bien! Sabes de NBA 👏"
+          : "Sigue practicando 💪";
+  triviaBox.innerHTML = `
+    <div class="trivia-result">
+      <h3>Resultado</h3>
+      <div class="trivia-score">${tScore}/${preguntas.length}</div>
+      <p>${msg}</p>
+      <button class="btn trivia-next" id="restart">Jugar de nuevo</button>
+    </div>`;
+  document.getElementById("restart").addEventListener("click", iniciarTrivia);
+}
+
+triviaBox.addEventListener("click", e => {
+  const opt = e.target.closest(".opt");
+  if(opt && !tContestada){
+    tContestada=true;
+    const i = +opt.dataset.i;
+    const correcta = preguntas[tIndex].a;
+    document.querySelectorAll(".opt").forEach(b=>b.disabled=true);
+    document.querySelectorAll(".opt")[correcta].classList.add("correct");
+    if(i===correcta) tScore++;
+    else opt.classList.add("wrong");
+    const last = tIndex===preguntas.length-1;
+    document.getElementById("triviaNext").innerHTML =
+      `<button class="btn trivia-next" id="next">${last?"Ver resultado":"Siguiente"}</button>`;
+    document.getElementById("next").addEventListener("click", () => {
+      if(last){ renderResultado(); }
+      else { tIndex++; renderPregunta(); }
+    });
+    return;
+  }
+});
+
 // Init
 renderProductos();
 renderCarrito();
